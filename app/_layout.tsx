@@ -8,6 +8,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import "react-native-reanimated";
 import Toast from 'react-native-toast-message';
 
+const originalShow = Toast.show;
+Toast.show = (options) => {
+  return originalShow({
+    onShow: () => {},
+    onHide: () => {},
+    onPress: () => {},
+    ...options,
+  });
+};
+
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
@@ -61,8 +71,8 @@ export default function RootLayout() {
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="onboarding" />
             <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="auth" />
-            <Stack.Screen name="+not-found" />
+            <Stack.Screen name="auth/login" />
+            <Stack.Screen name="auth/register" />
           </Stack>
           <Toast />
         </AuthWrapper>

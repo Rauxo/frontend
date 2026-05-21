@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/authSlice';
 import apiClient from '../../api/client';
-import { LinearGradient } from 'expo-linear-gradient';
+
 import { colors } from '../../theme/colors';
 
 export default function RegisterScreen() {
@@ -35,7 +35,7 @@ export default function RegisterScreen() {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
-      <LinearGradient colors={['#F4F1DE', '#FDFBF7']} style={StyleSheet.absoluteFillObject} />
+      <View style={[StyleSheet.absoluteFillObject, { backgroundColor: '#FDFBF7' }]} />
 
       <View style={styles.content}>
         <View style={styles.header}>
@@ -77,9 +77,9 @@ export default function RegisterScreen() {
             onPress={handleRegister}
             disabled={isLoading}
           >
-            <LinearGradient colors={['#A3B18A', '#8F9B77']} style={styles.gradientButton} start={{x: 0, y: 0}} end={{x: 1, y: 0}}>
+            <View style={[styles.gradientButton, { backgroundColor: '#8F9B77' }]}>
               <Text style={styles.buttonText}>{isLoading ? 'Signing Up...' : 'Sign Up'}</Text>
-            </LinearGradient>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.linkButton} onPress={() => router.push('/auth/login')}>

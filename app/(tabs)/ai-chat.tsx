@@ -3,7 +3,8 @@ import Toast from 'react-native-toast-message';
 import { useState, useEffect, useRef } from 'react';
 import apiClient from '../../api/client';
 import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View as _LGView } from 'react-native';
+const LinearGradient = ({style, children, colors}: any) => <_LGView style={[style, colors && colors.length > 0 ? {backgroundColor: colors[0]} : {}]}>{children}</_LGView>;
 
 export default function AIChatScreen() {
   const [messages, setMessages] = useState<{ role: string, content: string }[]>([]);
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingTop: Platform.OS === 'ios' ? 100 : 90, // Pad for global navbar
+    paddingTop: Platform.OS === 'ios' ? 120 : 100, // Pad for global navbar
     paddingBottom: 10,
   },
   actionButton: {
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
   inputArea: {
     flexDirection: 'row',
     padding: 12,
-    paddingBottom: Platform.OS === 'ios' ? 24 : 12,
+    paddingBottom: Platform.OS === 'ios' ? 95 : 75, // Avoid tab bar overlapping input
     backgroundColor: '#ffffff',
     borderTopWidth: 1,
     borderColor: '#E8E5D3',

@@ -2,7 +2,8 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'rea
 import { useState, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 import apiClient from '../../api/client';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View as _LGView } from 'react-native';
+const LinearGradient = ({style, children, colors}: any) => <_LGView style={[style, colors && colors.length > 0 ? {backgroundColor: colors[0]} : {}]}>{children}</_LGView>;
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 

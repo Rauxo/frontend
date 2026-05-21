@@ -2,7 +2,7 @@ import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
 import { useColorScheme, Platform, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { BlurView } from 'expo-blur';
+// removed expo-blur import
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function CustomHeader() {
@@ -11,7 +11,7 @@ function CustomHeader() {
 
   return (
     <View style={[styles.headerWrapper, { paddingTop: insets.top }]}>
-      <BlurView tint="light" intensity={80} style={StyleSheet.absoluteFill} />
+      <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(255, 255, 255, 0.9)' }]} />
       <View style={styles.headerContent}>
         <View style={styles.headerLeft}>
           <Image source={require('../../assets/logo.png')} style={styles.logo} resizeMode="contain" />
@@ -48,7 +48,7 @@ export default function TabLayout() {
           backgroundColor: 'transparent',
         },
         tabBarBackground: () => (
-          <BlurView tint="light" intensity={80} style={StyleSheet.absoluteFill} />
+          <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(255, 255, 255, 0.9)' }]} />
         ),
       }}>
       <Tabs.Screen

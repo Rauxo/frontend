@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, RefreshControl, ActivityIndicator, Platform } from 'react-native';
 import { useState, useEffect, useCallback } from 'react';
 import apiClient from '../../api/client';
-import { LinearGradient } from 'expo-linear-gradient';
+import { View as _LGView } from 'react-native';
+const LinearGradient = ({style, children, colors}: any) => <_LGView style={[style, colors && colors.length > 0 ? {backgroundColor: colors[0]} : {}]}>{children}</_LGView>;
 import { colors } from '../../theme/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
