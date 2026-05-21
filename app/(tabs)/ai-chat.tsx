@@ -22,19 +22,6 @@ export default function AIChatScreen() {
     }
   }, [messages, isTyping]);
 
-  const fetchHistory = async () => {
-    try {
-      const res = await apiClient.get('/chat');
-      if (res.data && res.data.length > 0) {
-        setMessages(res.data);
-      } else {
-        Toast.show({ type: 'info', text1: 'History', text2: 'No chat history found.' });
-      }
-    } catch (error) {
-      console.error('Failed to fetch chat history', error);
-      Toast.show({ type: 'error', text1: 'Error', text2: 'Could not fetch history.' });
-    }
-  };
 
   const clearChat = async () => {
     if (messages.length === 0) return;
@@ -78,11 +65,6 @@ export default function AIChatScreen() {
 
       {/* Local Action Bar for Chat */}
       <View style={styles.chatActionBar}>
-        <TouchableOpacity style={styles.actionButton} onPress={fetchHistory}>
-          <Ionicons name="time-outline" size={20} color="#3D4035" />
-          <Text style={styles.actionButtonText}>History</Text>
-        </TouchableOpacity>
-
         <TouchableOpacity style={styles.actionButton} onPress={clearChat}>
           <Ionicons name="add-circle-outline" size={20} color="#8A9A86" />
           <Text style={[styles.actionButtonText, { color: '#8A9A86', fontWeight: 'bold' }]}>New Chat</Text>
