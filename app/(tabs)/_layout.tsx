@@ -1,6 +1,34 @@
-import { Tabs } from 'expo-router';
+import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
-import { useColorScheme } from 'react-native';
+import { useColorScheme, Platform, StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+function CustomHeader() {
+  const insets = useSafeAreaInsets();
+  const router = useRouter();
+
+  return (
+    <View style={[styles.headerWrapper, { paddingTop: insets.top }]}>
+      <BlurView tint="light" intensity={80} style={StyleSheet.absoluteFill} />
+      <View style={styles.headerContent}>
+        <View style={styles.headerLeft}>
+          <Image source={require('../../assets/logo.png')} style={styles.logo} resizeMode="contain" />
+          <Text style={styles.appName}>KoYo</Text>
+        </View>
+        <View style={styles.headerRight}>
+          <TouchableOpacity style={styles.iconButton} onPress={() => router.push('/ai-chat')}>
+            <Ionicons name="chatbubbles-outline" size={24} color="#4A5043" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconButton} onPress={() => router.push('/profile')}>
+            <Ionicons name="person-outline" size={24} color="#4A5043" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+}
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -8,45 +36,112 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#2f95dc',
-        headerShown: true,
+        tabBarActiveTintColor: '#8A9A86',
+        tabBarInactiveTintColor: '#A0A498',
+        header: () => <CustomHeader />,
+        headerTransparent: true,
+        tabBarStyle: {
+          position: 'absolute',
+          borderTopWidth: 0,
+          elevation: 0,
+          height: Platform.OS === 'ios' ? 85 : 65,
+          backgroundColor: 'transparent',
+        },
+        tabBarBackground: () => (
+          <BlurView tint="light" intensity={80} style={StyleSheet.absoluteFill} />
+        ),
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
+          tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color={color} />
         }}
       />
       <Tabs.Screen
         name="mood"
         options={{
           title: 'Mood',
+          tabBarIcon: ({ color, size }) => <Ionicons name="happy-outline" size={size} color={color} />
         }}
       />
       <Tabs.Screen
         name="journal"
         options={{
           title: 'Journal',
+          tabBarIcon: ({ color, size }) => <Ionicons name="book-outline" size={size} color={color} />
         }}
       />
       <Tabs.Screen
         name="meditation"
         options={{
           title: 'Meditate',
+          tabBarIcon: ({ color, size }) => <Ionicons name="leaf-outline" size={size} color={color} />
+        }}
+      />
+      <Tabs.Screen
+        name="journey"
+        options={{
+          title: 'Journey',
+          tabBarIcon: ({ color, size }) => <Ionicons name="stats-chart-outline" size={size} color={color} />
         }}
       />
       <Tabs.Screen
         name="ai-chat"
         options={{
+          href: null,
           title: 'AI Chat',
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
+          href: null,
           title: 'Profile',
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  headerWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 100,
+    overflow: 'hidden',
+  },
+  headerContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+    paddingTop: 8,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 32,
+    height: 32,
+    marginRight: 8,
+    borderRadius: 8,
+  },
+  appName: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: '#3D4035',
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconButton: {
+    marginLeft: 16,
+    padding: 4,
+  },
+});

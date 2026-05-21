@@ -1,14 +1,27 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store/store';
+import { logout } from '../../store/authSlice';
 
 export default function ProfileScreen() {
+  const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    Alert.alert('Logout', 'Are you sure you want to logout?', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Logout', style: 'destructive', onPress: () => dispatch(logout()) }
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.avatar}>
-          <Text style={styles.avatarText}>U</Text>
+          <Text style={styles.avatarText}>{user?.name?.charAt(0)?.toUpperCase() || 'U'}</Text>
         </View>
-        <Text style={styles.name}>User Name</Text>
-        <Text style={styles.email}>user@example.com</Text>
+        <Text style={styles.name}>{user?.name || 'User Name'}</Text>
+        <Text style={styles.email}>{user?.email || 'user@example.com'}</Text>
       </View>
       
       <View style={styles.section}>
@@ -21,7 +34,7 @@ export default function ProfileScreen() {
         <TouchableOpacity style={styles.menuItem}>
           <Text style={styles.menuText}>Help & Support</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.menuItem, styles.logoutButton]}>
+        <TouchableOpacity style={[styles.menuItem, styles.logoutButton]} onPress={handleLogout}>
           <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>
       </View>
