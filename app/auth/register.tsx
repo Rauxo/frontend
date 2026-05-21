@@ -5,7 +5,8 @@ import { router } from 'expo-router';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/authSlice';
 import apiClient from '../../api/client';
-import { colors } from '../theme/colors';
+import { LinearGradient } from 'expo-linear-gradient';
+import { colors } from '../../theme/colors';
 
 export default function RegisterScreen() {
   const [name, setName] = useState('');

@@ -5,7 +5,7 @@ import apiClient from '../../api/client';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '../theme/colors';
+import { colors } from '../../theme/colors';
 
 export default function JournalScreen() {
   const [entry, setEntry] = useState('');

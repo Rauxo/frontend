@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../store/authSlice';
 import apiClient from '../../api/client';
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from '../theme/colors';
+import { colors } from '../../theme/colors';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');

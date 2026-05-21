@@ -8,14 +8,14 @@ export default function OnboardingScreen() {
 
   const handleGetStarted = async () => {
     await AsyncStorage.setItem('alreadyLaunched', 'true');
-    router.replace('/auth/login');
+    router.replace('/auth/register');
   };
 
   return (
     <LinearGradient colors={['#E0F2FE', '#FFFFFF', '#FDF2F8']} style={styles.container}>
       <View style={styles.content}>
         <View style={styles.illustrationContainer}>
-          <Text style={styles.emoji}>🌿</Text>
+          <Image source={require('../assets/logo.png')} style={styles.logo} />
         </View>
         <Text style={styles.title}>Your Safe Space</Text>
         <Text style={styles.subtitle}>
@@ -57,8 +57,10 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     elevation: 10,
   },
-  emoji: {
-    fontSize: 80,
+  logo: {
+    width: 80,
+    height: 80,
+    resizeMode: 'contain',
   },
   title: {
     fontSize: 32,

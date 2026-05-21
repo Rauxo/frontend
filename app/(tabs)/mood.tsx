@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native';
-import { colors } from '../theme/colors';
+import { colors } from '../../theme/colors';
 import { useState } from 'react';
 import apiClient from '../../api/client';
 
