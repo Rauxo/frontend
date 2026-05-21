@@ -5,6 +5,16 @@ import { View as _LGView } from 'react-native';
 const LinearGradient = ({style, children, colors}: any) => <_LGView style={[style, colors && colors.length > 0 ? {backgroundColor: colors[0]} : {}]}>{children}</_LGView>;
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store/store';
+
+function getGreeting(): string {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return 'Good Morning';
+  if (hour >= 12 && hour < 17) return 'Good Afternoon';
+  if (hour >= 17 && hour < 21) return 'Good Evening';
+  return 'Good Night';
+}
 
 const TIPS = [
   { id: '1', title: '5-4-3-2-1 Grounding', text: 'Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste to stay present.', color: ['#FF9A9E', '#FECFEF'], icon: 'leaf-outline' },
@@ -15,6 +25,9 @@ const TIPS = [
 export default function HomeScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const router = useRouter();
+  const user = useSelector((state: RootState) => state.auth.user);
+  const firstName = user?.name?.split(' ')[0] || user?.username || user?.email?.split('@')[0] || '';
+  const greeting = getGreeting();
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -30,7 +43,7 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
-          <Text style={styles.greeting}>Good Morning,</Text>
+          <Text style={styles.greeting}>{greeting}{firstName ? `, ${firstName}` : ''}!</Text>
           <Text style={styles.subtitle}>Welcome to your safe space</Text>
         </View>
 
