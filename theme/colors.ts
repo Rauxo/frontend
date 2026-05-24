@@ -1,14 +1,17 @@
 export const colors = {
-  background: '#FFFFFF', // app background
+  background: '#E0F2FE',
   cardBackground: '#FFFFFF',
-  primary: '#25D366', // WhatsApp green
-  secondary: '#ECE5DD', // light bubble
-  accent: '#128C7E', // darker green
-  textPrimary: '#000000',
-  textSecondary: '#555555',
-  success: '#34B7F1',
+  primary: '#4facfe',
+  secondary: '#E0F2FE',
+  accent: '#4facfe',
+  textPrimary: '#1E293B',
+  textSecondary: '#64748B',
+  success: '#00f2fe',
   warning: '#F5A623',
   error: '#D9534F',
-  gradientStart: '#e0f7fa',
-  gradientEnd: '#b2ebf2'
+  gradientStart: '#E0F2FE',
+  gradientEnd: '#FDF2F8',
+  shadowColor: '#4facfe',
+  inputBackground: '#F0F7FF',
+  borderColor: '#D6E8F7',
 };
